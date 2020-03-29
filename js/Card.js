@@ -1,4 +1,4 @@
-class Card {
+export class Card {
 
   static like(event) { //событие лайка
       if (event.target.classList.contains('place-card__like-icon')){ //событие лайка

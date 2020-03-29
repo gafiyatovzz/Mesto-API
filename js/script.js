@@ -1,5 +1,10 @@
-(function(){
-  // const initialCards = [];
+import {Api} from './Api.js'
+import {Card} from './Card.js'
+import {Popup} from './Popup.js'
+import {FormValidation} from './FormValidation.js'
+import {CardList} from './CardList.js'
+import {UserInfo} from './UserInfo.js'
+
   const placesList = document.querySelector('.places-list'); //обратился к контейнеру карточек
   const popup = document.querySelector('.popup');
   const popupEdit = document.querySelector('.popup-edit');
@@ -96,7 +101,6 @@
   document.querySelector('.popup__close-pic').addEventListener('click', function (event) {  //событие закрытия картинки
     document.querySelector('.popup-pic').classList.remove('popup_is-opened');
   });
-})();
 
 
 /*
