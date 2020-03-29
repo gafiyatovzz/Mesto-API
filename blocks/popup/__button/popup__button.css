@@ -1,0 +1,18 @@
+.popup__button, .popup__button_is-active {
+  width: 100%;
+  height: 50px;
+  border: 1px solid rgba(0, 0, 0, .2);
+  margin-top: 48px;
+  color: rgba(0, 0, 0, .2);
+  font-size: 36px;
+  font-style: normal;
+font-weight: normal;
+font-size: 18px;
+line-height: 22px;
+}
+
+.popup__button_is-active {
+  color: rgb(241, 232, 232);
+  border: 1px solid rgba(0, 0, 0, 1);
+  background-color: rgba(0, 0, 0, 1);
+}
