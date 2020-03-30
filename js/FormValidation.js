@@ -1,5 +1,4 @@
-class FormValidation {
-  'use strict';
+export class FormValidation {
    constructor(item, message) {
       this.form = item.querySelector('.popup__form');
       this.message = message;

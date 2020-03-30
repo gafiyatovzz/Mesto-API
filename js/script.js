@@ -1,5 +1,10 @@
-(function(){
-  // const initialCards = [];
+import {Api} from './Api.js';
+import {Card} from './Card.js';
+import {Popup} from './Popup.js';
+import {FormValidation} from './FormValidation.js';
+import {CardList} from './CardList.js';
+import {UserInfo} from './UserInfo.js';
+
   const placesList = document.querySelector('.places-list'); //обратился к контейнеру карточек
   const popup = document.querySelector('.popup');
   const popupEdit = document.querySelector('.popup-edit');
@@ -16,8 +21,8 @@
   const inputJob = document.querySelector('.popup__input_job');
   const errorName = document.querySelector('.popup__input_name ~ span');
   const errorJob = document.querySelector('.popup__input_job ~ span');
-  userName = document.querySelector('.user-info__name');
-  userJob = document.querySelector('.user-info__job');
+  // const userName = document.querySelector('.user-info__name');
+  // const userJob = document.querySelector('.user-info__job');
 
   const ERROR_MESSAGES = {
     valueMissing: 'Это обязательное поле',
@@ -33,8 +38,6 @@
       'content-type': 'application/json' 
     }
   });
-  
-
 
   const userInfo = new UserInfo(popupEdit, api);
   const cardList = new CardList(placesList, cardd, api, userInfo);
@@ -76,8 +79,6 @@
     formAddButton.addEventListener('click', () => { //событие добавления карточки
       popup.classList.remove('popup_is-opened');
 
-      // api.sendNewCard(formAdd.name.value, formAdd.link.value);
-
       cardList.addCard(formAdd.name.value, formAdd.link.value);
       formValidation.setSubmitButtonState(formAdd, formAddButton);
     });
@@ -96,7 +97,6 @@
   document.querySelector('.popup__close-pic').addEventListener('click', function (event) {  //событие закрытия картинки
     document.querySelector('.popup-pic').classList.remove('popup_is-opened');
   });
-})();
 
 
 /*

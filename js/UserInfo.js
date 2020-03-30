@@ -1,4 +1,4 @@
-class UserInfo {
+export class UserInfo {
     constructor(item, api) {
         this.form = item.querySelector('.popup__form');
         this.button = item.querySelector('.btn-edit');
