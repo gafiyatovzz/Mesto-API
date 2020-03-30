@@ -1,2 +1,3 @@
 # FrontProject
-Проект по Webpack
+##Проект по Webpack
+Доступен по ссылке: https://gafiyatovzz.github.io/FrontProject/
