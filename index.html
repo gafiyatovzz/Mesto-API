@@ -47,7 +47,7 @@
 
     <div class="popup popup-edit">
       <div class="popup__content">
-        <img src="./images/close.svg" alt="" class="popup__close popup__close-edit">
+        <img src="<%=require('./images/close.svg').default%>" alt="" class="popup__close popup__close-edit">
         <h3 class="popup__title">Редактировать профиль</h3>
         <form class="popup__form" name="edit" novalidate >
           <div class="input__container">
@@ -72,13 +72,7 @@
       </div>
     </div>
   </div>
-  <script src="js/Card.js"></script>
-  <script src="js/CardList.js"></script>
-  <script src="js/Popup.js"></script>
-  <script src='js/FormValidation.js'></script>
-  <script src='js/UserInfo.js'></script>
-  <script src="js/Api.js"></script>
-  <script src='js/script.js'></script>
+  <script type="module" src='js/script.js'></script>
   <script src="<%= htmlWebpackPlugin.files.chunks.main.entry %>"></script>
 </body>
 </html>

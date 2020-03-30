@@ -39,12 +39,3 @@ export class Api {
     }
   
 }
-
-
-// const api = new Api({
-//     baseUrl: 'https://praktikum.tk/cohort8/cards',
-//     headers: {
-//       authorization: '59deab8e-005f-42bb-a977-41ac03302afc',
-//       'Content-Type': 'application/json'
-//     }
-//   });
