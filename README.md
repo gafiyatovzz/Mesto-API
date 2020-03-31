@@ -1,9 +1,13 @@
 # FrontProject
-<<<<<<< HEAD
 ## Проект по Webpack
 Доступен по ссылке: https://gafiyatovzz.github.io/FrontProject/
-=======
-### Учусь собирать проект при помощи Webpack
 
-Проект доступен по ссылке: https://gafiyatovzz.github.io/FrontProject/
->>>>>>> develop
+## Инструкция по сборке
+    ### Установка звисимостей
+    npm i
+   
+   ### Разработка
+   npm run dev
+   
+   ### Сборка
+   npm run build

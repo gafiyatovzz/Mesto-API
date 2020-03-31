@@ -1,3 +1,5 @@
+import { Card } from './Card.js';
+
 export class CardList {
     constructor(container, card, api, userInfo) {
         this.container = container;

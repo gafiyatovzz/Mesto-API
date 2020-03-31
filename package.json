@@ -4,7 +4,7 @@
   "description": "Последняя проектная работа по Front-end",
   "main": "index.js",
   "scripts": {
-    "build": "NODE_ENV=production rimraf dist && webpack --mode production",
+    "build": "rimraf dist && NODE_ENV=production webpack --mode production",
     "dev": "NODE_ENV=development webpack-dev-server --mode development --open --watch",
     "deploy": "NODE_ENV=production gh-pages -d dist"
   },
