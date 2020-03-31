@@ -4,10 +4,10 @@
 
 ## Инструкция по сборке
    ### Установка звисимостей
-   npm i
+      npm i
    
    ### Разработка
-   npm run dev
+      npm run dev
    
    ### Сборка
-   npm run build
+      npm run build
