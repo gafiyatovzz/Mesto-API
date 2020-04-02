@@ -31,8 +31,9 @@ import {UserInfo} from './UserInfo.js';
   }
 
   const cardd = new Card();
+  const serverUrl = NODE_ENV === 'development' ? 'http://praktikum.tk/cohort8' : 'https://praktikum.tk/cohort8';
   const api = new Api({
-    baseUrl: 'https://praktikum.tk/cohort8',
+    baseUrl: serverUrl,
     headers: {
       authorization: '59deab8e-005f-42bb-a977-41ac03302afc',
       'content-type': 'application/json' 

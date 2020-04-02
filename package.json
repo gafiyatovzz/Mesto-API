@@ -21,7 +21,7 @@
   "dependencies": {
     "babel-polyfill": "^6.26.0",
     "core-js": "^3.4.1",
-    "jquery": "^3.4.1",
+    "jquery": "3.4.1",
     "resolve-cwd": "^3.0.0"
   },
   "devDependencies": {
