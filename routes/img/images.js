@@ -5,7 +5,7 @@ const fsPromises = require('fs').promises;
 routeImg.get('/', (req, res) => {
   fsPromises.readFile(path.join(__dirname, '../../data/img/avatar.jpg'), { encoding: null })
     .then((data) => {
-      console.log(data);
+      res.send(JSON.parse(data));
     })
     .catch((err) => {
       res.status(500).send({ message: err });
