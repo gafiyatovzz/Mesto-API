@@ -9,9 +9,7 @@ const path = require('path');
 const routes = require('./routes/routes');
 
 app.use(bodyParser.urlencoded({ extended: true }));
-
 app.use('/', routes);
-
 app.use(express.static(path.join(__dirname, '/public')));
 
 app.listen(PORT, () => {
