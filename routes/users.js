@@ -23,6 +23,7 @@ function getUserMiddleware(req, res, next) {
       res.status(404);
       return next({ message: 'Нет пользователя с таким id' });
     }
+
     req.user = user;
     return next();
   });
