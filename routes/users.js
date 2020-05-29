@@ -15,14 +15,13 @@ router.get('/', (req, res) => {
 });
 
 function getUserMiddleware(req, res, next) {
-  fs.readFile(path.join(__dirname, '../data/users.json'), (e, data) => {
+  return fs.readFile(path.join(__dirname, '../data/users.json'), (e, data) => {
     // eslint-disable-next-line no-underscore-dangle
     const user = JSON.parse(data).find((u) => u._id === req.params.id);
-
     if (!user) {
-      res.status(404);
-      return next({ message: 'Нет пользователя с таким id' });
+      return res.status(404).send({ message: 'Нет пользователя с таким id' });
     }
+
     req.user = user;
     return next();
   });
