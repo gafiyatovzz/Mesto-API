@@ -6,15 +6,7 @@ module.exports = {
   context: path.resolve(__dirname, 'src'),
   mode: 'production',
   entry: {
-    card: './js/Card.js',
-    cardList: './js/Cardlist.js',
-    popup: './js/Popup.js',
-    formValidation: './js/FormValidation.js',
-    userInfo: './js/UserInfo.js',
-    api: './js/Api.js',
-    script: './js/script.js',
-    style: './pages/index.css',
-    // main: './main.js',
+    main: './main.js',
   },
   output: {
     path: path.resolve(__dirname, 'dist/'),

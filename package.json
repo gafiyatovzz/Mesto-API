@@ -4,7 +4,7 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "build": "NODE_ENV=production rimraf dist && webpack --mode development",
+    "build": "NODE_ENV=production rimraf dist && webpack --mode production",
     "start": "node app.js",
     "dev": "nodemon app.js"
   },

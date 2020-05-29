@@ -5,3 +5,4 @@ require('./js/FormValidation');
 require('./js/Popup');
 require('./js/UserInfo');
 require('./js/Api');
+require('./js/script');
