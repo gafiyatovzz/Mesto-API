@@ -1,17 +1,24 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const WebpackMd5Hash = require('webpack-md5-hash');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin'); // добавили плагин
 
 module.exports = {
   context: path.resolve(__dirname, 'src'),
   mode: 'production',
   entry: {
-    main: './js/main.js',
+    card: './js/Card.js',
+    cardList: './js/Cardlist.js',
+    popup: './js/Popup.js',
+    formValidation: './js/FormValidation.js',
+    userInfo: './js/UserInfo.js',
+    api: './js/Api.js',
+    script: './js/script.js',
+    style: './pages/index.css',
+    // main: './main.js',
   },
   output: {
-    path: path.resolve(__dirname, 'dist/js/'),
-    filename: 'script.[contenthash].js',
+    path: path.resolve(__dirname, 'dist/'),
+    filename: '[name].js',
   },
   module: {
     rules: [
@@ -28,11 +35,8 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        use: [
-          MiniCssExtractPlugin.loader,
-          'css-loader',
-          'postcss-loader',
-        ], // добавили минификацию CSS
+        use: [MiniCssExtractPlugin.loader, 'css-loader', 'postcss-loader',
+        ],
       },
       {
         test: /\.(png|jpg|gif|ico|svg)$/,
@@ -48,14 +52,11 @@ module.exports = {
   },
   plugins: [
     new MiniCssExtractPlugin({
-      template: './pages/index.css',
-      filename: 'style.[contenthash].css',
+      filename: 'style.css',
     }),
     new HtmlWebpackPlugin({
-      inject: false,
       template: './index.html',
-      filename: 'index.[contenthash].html',
+      filename: 'index.html',
     }),
-    new WebpackMd5Hash(),
   ],
 };

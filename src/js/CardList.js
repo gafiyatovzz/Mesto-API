@@ -7,20 +7,20 @@ export default class CardList {
     this.container.addEventListener('click', this.eventHandler);
   }
 
-  eventHandler(event) {
-    this.card.like(event); // если лайк
-    this.card.remove(event); // если удаление
-  }
-
   addCard(name, link) {
     const place = this.card.create(name, link);
     this.container.append(place);
   }
 
   render(initCards) {
-    // eslint-disable-next-line no-restricted-syntax
     for (const { name, link } of initCards) {
       this.addCard(name, link);
     }
+  }
+
+  eventHandler(event) {
+    console.log(event.target)
+    this.card.like(event); // если лайк
+    this.card.remove(event); // если удаление
   }
 }

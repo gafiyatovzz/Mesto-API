@@ -1,8 +1,3 @@
-/* eslint-disable no-param-reassign */
-/* eslint-disable class-methods-use-this */
-/* eslint-disable no-return-assign */
-/* eslint-disable no-restricted-syntax */
-
 export default class FormValidation {
   constructor(item, message) {
     this.form = item.querySelector('.popup__form');

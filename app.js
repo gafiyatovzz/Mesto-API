@@ -1,6 +1,6 @@
 const express = require('express');
 
-const { PORT = 3000, BASE_PATH } = process.env;
+const { PORT = 3000 } = process.env;
 
 const app = express();
 const bodyParser = require('body-parser');
@@ -8,7 +8,7 @@ const path = require('path');
 
 const routes = require('./routes/routes');
 
-const staticDir = path.join(__dirname, 'public');
+const staticDir = path.join(__dirname, 'dist');
 
 app.use('/', routes);
 
@@ -20,6 +20,5 @@ app.use((req, res) => {
 });
 
 app.listen(PORT, () => {
-  console.log('Your port 3000');
-  console.log(BASE_PATH);
+  console.log('Server launch on port', PORT);
 });

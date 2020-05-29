@@ -1,13 +1,11 @@
-/* eslint-disable no-undef */
-
-import Api from './Api';
 import Card from './Card';
 import CardList from './CardList';
 import FormValidation from './FormValidation';
 import Popup from './Popup';
 import UserInfo from './UserInfo';
+import Api from './Api';
 
-export default (function scripCard() {
+(function scripCard() {
   const placesList = document.querySelector('.places-list');
   const popup = document.querySelector('.popup');
   const popupEdit = document.querySelector('.popup-edit');
@@ -44,7 +42,6 @@ export default (function scripCard() {
   const cardList = new CardList(placesList, cardd, api, userInfo);
 
   const formValidation = new FormValidation(popupEdit, ERROR_MESSAGES);
-  // eslint-disable-next-line no-unused-vars
   const formValidationPopupCard = new FormValidation(popupAdd, ERROR_MESSAGES);
 
   const popupEditProfile = new Popup(popupEdit);
@@ -75,6 +72,7 @@ export default (function scripCard() {
 
   popupButtonAdd.addEventListener('click', () => popupAddCard.open());
 
+
   formAdd.addEventListener('submit', (event) => {
     event.preventDefault();
 
@@ -99,4 +97,14 @@ export default (function scripCard() {
   document.querySelector('.popup__close-pic').addEventListener('click', () => { // событие закрытия картинки
     document.querySelector('.popup-pic').classList.remove('popup_is-opened');
   });
+
+  placesList.addEventListener('click', (event) => {
+    if (event.target.classList.contains('place-card__like-icon')) { // событие лайка
+      event.target.classList.toggle('place-card__like-icon_liked');
+    }
+
+    if (event.target.classList.contains('place-card__delete-icon')) {
+      event.target.closest('.place-card').remove();
+    }
+  })
 }());

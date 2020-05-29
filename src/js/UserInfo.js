@@ -1,4 +1,3 @@
-/* eslint-disable no-undef */
 export default class UserInfo {
   constructor(item, api) {
     this.form = item.querySelector('.popup__form');

@@ -1,17 +1,17 @@
 export default class Card {
-  static like(event) { // событие лайка
+  like(event) { // событие лайка
     if (event.target.classList.contains('place-card__like-icon')) { // событие лайка
       event.target.classList.toggle('place-card__like-icon_liked');
     }
   }
 
-  static remove(event) {
+  remove(event) {
     if (event.target.classList.contains('place-card__delete-icon')) {
       event.target.closest('.place-card').remove();
     }
   }
 
-  static create(nameValue, linkValue) { // функция добавления карточки
+  create(nameValue, linkValue) { // функция добавления карточки
     // eslint-disable-next-line no-undef
     const placeCard = document.createElement('div');
     placeCard.classList.add('place-card');
