@@ -8,7 +8,7 @@ router.get('/', (req, res) => {
       res.send(JSON.parse(data));
     })
     .catch((err) => {
-      res.status(500).send(`Error: ${err}`);
+      res.status(500).send({ message: err.message });
     });
 });
 
