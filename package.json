@@ -2,11 +2,11 @@
   "name": "front12",
   "version": "1.0.0",
   "description": "Fullstack Mesto",
-  "main": "app.js",
+  "main": "server.js",
   "scripts": {
     "build": "NODE_ENV=production rimraf dist && webpack --mode production",
-    "start": "node app.js",
-    "dev": "nodemon app.js"
+    "start": "node server.js",
+    "dev": "nodemon server.js"
   },
   "author": "Zakir Gafiyatov",
   "license": "ISC",
