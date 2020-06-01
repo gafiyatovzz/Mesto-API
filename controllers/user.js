@@ -1,6 +1,5 @@
-const User = require('../../models/User');
-
-const errorHandler = require('../utils/errorHandler');
+const User = require('../models/User');
+// const errorHandler = require('../utils/errorHandler');
 const sendData = require('../utils/sendData');
 
 
@@ -11,7 +10,7 @@ module.exports.getById = (req, res, next) => {
 }
 
 module.exports.getAll = (req, res) => {
-  User.find({ user: req.user.id })
+  User.find({})
     .then(sendData)
     .catch(err => errorHandler(err));
 }
@@ -21,5 +20,5 @@ module.exports.createUser = (req, res) => {
 
   User.create({ name, about, avatar })
     .then(sendData)
-    .catch(err => errorHandler(err));
+    .catch(err => res.status(500).send({ message: err.message }));
 }
