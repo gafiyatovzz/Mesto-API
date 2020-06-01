@@ -2,7 +2,7 @@ const router = require('express').Router();
 const path = require('path');
 const fsPromises = require('fs').promises;
 
-const getUserMiddleware = require('./getUserMiddleware');
+const getUserMiddleware = require('../middlewares/getUserMiddleware');
 
 router.get('/', (req, res) => {
   fsPromises.readFile(path.join(__dirname, '../data/users.json'))

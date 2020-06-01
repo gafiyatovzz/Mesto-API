@@ -1,12 +1,27 @@
 const express = require('express');
-
 const app = express();
-const bodyParser = require('body-parser');
+const mongoose = require('mongoose');
 const path = require('path');
-
+const bodyParser = require('body-parser');
+const staticDir = path.join(__dirname, 'dist');
 const routes = require('./routes/routes');
 
-const staticDir = path.join(__dirname, 'dist');
+
+// *************** MONGO_DB ****************** //
+
+const URI = 'mongodb://localhost:27017/mestodb';
+const options = {
+  useNewUrlParser: true,
+  useCreateIndex: true,
+  useFindAndModify: false
+}
+
+mongoose.connect(URI, options);
+
+
+
+// *************** ROUTES ****************** //
+
 
 app.use('/', routes);
 
