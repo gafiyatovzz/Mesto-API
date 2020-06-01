@@ -1,6 +1,6 @@
 const router = require('express').Router();
-const users = require('./users');
-const cards = require('./cards');
+const users = require('./user/user');
+const cards = require('./card/card');
 
 router.use('/users', users);
 router.use('/cards', cards);
