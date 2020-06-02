@@ -3,10 +3,10 @@ const app = express();
 const mongoose = require('mongoose');
 const path = require('path');
 const bodyParser = require('body-parser');
-const staticDir = path.join(__dirname, 'dist');
+const staticDir = path.join(__dirname, 'client/dist');
 
-const userRoutes = require('./routes/user');
-const cardRoutes = require('./routes/card');
+const userRoutes = require('./api/routes/user');
+const cardRoutes = require('./api/routes/card');
 
 
 

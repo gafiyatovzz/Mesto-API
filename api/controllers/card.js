@@ -5,9 +5,9 @@ const errorHandler = require('../utils/errorHandler');
 module.exports.createCard = (req, res) => {
   console.log(req.user._id); // временное решение авторизации
 
-  const { name, link, owner, likes, cretedAt } = req.body;
+  const { name, link } = req.body;
 
-  Card.create({ name, link, owner, likes, cretedAt })
+  Card.create({ name, link })
     .then(card => res.send({ data: card }))
     .catch(err => errorHandler(res, err));
 }
