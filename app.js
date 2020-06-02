@@ -5,8 +5,8 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const staticDir = path.join(__dirname, 'dist');
 
-const users = require('./routes/user');
-const cards = require('./routes/card');
+const userRoutes = require('./routes/user');
+const cardRoutes = require('./routes/card');
 
 
 
@@ -29,14 +29,27 @@ mongoose.connect(URI, options)
 // *************** CONFIG ****************** //
 
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json())
 app.use(express.static(staticDir));
+
+
+
+// *************** MIDDLEWARES ****************** //
+
+app.use((req, res, next) => {
+  req.user = {
+      _id: '5ed639e96e2bbd68f18e57c0'
+  };
+
+  next();
+});
 
 
 
 // *************** ROUTES ****************** //
 
-app.use('/users', users);
-app.use('/cards', cards);
+app.use('/users', userRoutes);
+app.use('/cards', cardRoutes);
 
 app.use((req, res) => {
   res.status(404).send({ message: 'Запрашиваемый ресурс не найден' });

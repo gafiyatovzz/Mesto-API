@@ -1,3 +1,3 @@
-module.exports = (req, res) => {
-  res.send(user => console.log("user"));
+module.exports = (res) => {
+  res.send({ data: user })
 };
