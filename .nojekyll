@@ -1,6 +1,2 @@
-require("stop/package.json"); // stop is a peer dependency. 
-<<<<<<< HEAD
+require("stop/package.json"); // stop is a peer dependency.
 // require("nojekyll/[??]")
-=======
-// require("nojekyll/[??]")
->>>>>>> origin/master
