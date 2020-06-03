@@ -1,19 +1,16 @@
 const Card = require('../models/Card');
 const errorHandler = require('../utils/errorHandler');
 
-
 module.exports.createCard = (req, res) => {
-  console.log(req.user._id); // временное решение авторизации
+  const { name, link, owner } = req.body;
 
-  const { name, link } = req.body;
-
-  Card.create({ name, link })
+  Card.create({ name, link, owner })
     .then((card) => res.send({ data: card }))
     .catch((err) => errorHandler(res, err));
 };
 
 
-module.exports.getCard = (req, res) => {
+module.exports.getCards = (req, res) => {
   Card.find({})
     .then((card) => res.send({ data: card }))
     .catch((err) => errorHandler(res, err));
@@ -21,20 +18,22 @@ module.exports.getCard = (req, res) => {
 
 
 module.exports.deleteCard = (req, res) => {
-  Card.findById(req.params.id)
+  Card.findByIdAndRemove(req.params.id)
     .then((card) => res.send({ data: card }))
-    .catch((err) => errorHandler(res, err));
+    .catch((err) => errorHandler(req, res, err));
 };
 
 
-module.exports.addLikes = (req, res) => {
+module.exports.addLike = (req, res) => {
   Card.findByIdAndUpdate(
     req.params.id,
-    { $addToSet: { likes: req.user._id } },
+    { $addToSet: { likes: [req.user._id] } },
     { new: true },
   )
-    .then((card) => res.send({ data: card }))
-    .catch((err) => errorHandler(res, err));
+    .then((card) => {
+      res.send({ data: card });
+    })
+    .catch((err) => errorHandler(req, res, err));
 };
 
 
@@ -45,16 +44,5 @@ module.exports.disLike = (req, res) => {
     { new: true },
   )
     .then((card) => res.send({ data: card }))
-    .catch((err) => errorHandler(res, err));
-};
-
-
-module.exports.addLike = (req, res) => {
-  Card.findByIdAndUpdate(
-    req.params.id,
-    { $addToSet: { likes: req.user._id } },
-    { new: true },
-  )
-    .then((card) => res.send({ data: card }))
-    .catch((err) => errorHandler(res, err));
+    .catch((err) => errorHandler(req, res, err));
 };

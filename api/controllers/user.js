@@ -5,7 +5,7 @@ const errorHandler = require('../utils/errorHandler');
 module.exports.getById = (req, res) => {
   User.findById(req.params.id)
     .then((user) => res.send({ data: user }))
-    .catch((err) => errorHandler(res, err));
+    .catch((err) => errorHandler(req, res, err));
 };
 
 module.exports.getAll = (req, res) => {

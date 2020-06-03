@@ -4,7 +4,7 @@ const controller = require('../controllers/card');
 
 router.post('/', controller.createCard);
 
-router.get('/', controller.getCard);
+router.get('/', controller.getCards);
 
 router.delete('/:id', controller.deleteCard);
 
