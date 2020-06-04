@@ -5,7 +5,7 @@ const errorHandler = require('../utils/errorHandler');
 module.exports.getById = (req, res) => {
   User.findById(req.params.id)
     .then((user) => res.send({ data: user }))
-    .catch((err) => errorHandler(req, res, err));
+    .catch((err) => errorHandler(res, err));
 };
 
 module.exports.getAll = (req, res) => {
@@ -19,12 +19,7 @@ module.exports.createUser = (req, res) => {
 
   User.create({ name, about, avatar })
     .then((user) => res.send({ data: user }))
-    .catch((err) => {
-      if (err) {
-        res.json({ message: err.message });
-      }
-      errorHandler(res, err);
-    });
+    .catch((err) => errorHandler(res, err));
 };
 
 module.exports.updateUser = (req, res) => {
@@ -36,7 +31,15 @@ module.exports.updateUser = (req, res) => {
 };
 
 module.exports.updateUserAvatar = (req, res) => {
-  User.findOneAndUpdate(req.params.id, { avatar: req.body.avatar })
-    .then((user) => res.send({ data: user }))
+  User.findByIdAndUpdate(req.params.id,
+    { avatar: req.body.avatar },
+    {
+      new: true,
+      runValidators: true,
+      upsert: true,
+    })
+    .then((user) => {
+      res.send({ data: user });
+    })
     .catch((err) => errorHandler(res, err));
 };

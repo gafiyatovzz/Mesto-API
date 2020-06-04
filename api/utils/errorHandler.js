@@ -1,4 +1,4 @@
-module.exports = (req, res, error) => {
+module.exports = (res, error) => {
   if (error.name === 'CastError') {
     res.status(404).json({
       success: false,
@@ -11,8 +11,10 @@ module.exports = (req, res, error) => {
       message: '400 - некорректный id',
     });
   }
-  res.status(500).json({
-    success: false,
-    message: error.name,
-  });
+  if (error.name === 'ValidationError') {
+    res.status(400).json({
+      success: false,
+      message: '400 Ошибка валидации',
+    });
+  }
 };

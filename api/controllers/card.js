@@ -20,7 +20,7 @@ module.exports.getCards = (req, res) => {
 module.exports.deleteCard = (req, res) => {
   Card.findByIdAndRemove(req.params.id)
     .then((card) => res.send({ data: card }))
-    .catch((err) => errorHandler(req, res, err));
+    .catch((err) => errorHandler(res, err));
 };
 
 
@@ -33,7 +33,7 @@ module.exports.addLike = (req, res) => {
     .then((card) => {
       res.send({ data: card });
     })
-    .catch((err) => errorHandler(req, res, err));
+    .catch((err) => errorHandler(res, err));
 };
 
 
@@ -44,5 +44,5 @@ module.exports.disLike = (req, res) => {
     { new: true },
   )
     .then((card) => res.send({ data: card }))
-    .catch((err) => errorHandler(req, res, err));
+    .catch((err) => errorHandler(res, err));
 };
