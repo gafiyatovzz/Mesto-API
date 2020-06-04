@@ -1,6 +1,6 @@
+// const assert = require('assert');
 const User = require('../models/User');
 const errorHandler = require('../utils/errorHandler');
-
 
 module.exports.getById = (req, res) => {
   User.findById(req.params.id)
@@ -19,7 +19,12 @@ module.exports.createUser = (req, res) => {
 
   User.create({ name, about, avatar })
     .then((user) => res.send({ data: user }))
-    .catch((err) => errorHandler(res, err));
+    .catch((err) => {
+      if (err) {
+        res.json({ message: err.message });
+      }
+      errorHandler(res, err);
+    });
 };
 
 module.exports.updateUser = (req, res) => {

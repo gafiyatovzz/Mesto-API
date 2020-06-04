@@ -37,7 +37,7 @@ app.use(express.static(staticDir));
 
 app.use((req, res, next) => {
   req.user = {
-    _id: '5ed639686e2bbd68f18e57bf',
+    _id: '5ed63968e2bbd68f18e57bf',
   };
 
   next();
