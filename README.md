@@ -1,6 +1,4 @@
 # Mesto Fullstack
-## 
-Доступен по ссылке: https://gafiyatovzz.github.io/FrontProject/
 
 ## Инструкция по сборке
    ### Установка звисимостей
