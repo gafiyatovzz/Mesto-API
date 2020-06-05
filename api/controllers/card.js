@@ -2,9 +2,9 @@ const Card = require('../models/Card');
 const errorHandler = require('../utils/errorHandler');
 
 module.exports.createCard = (req, res) => {
-  const { name, link, owner } = req.body;
+  const { name, link, ownerId } = req.body;
 
-  Card.create({ name, link, owner })
+  Card.create({ name, link, owner: ownerId })
     .then((card) => res.send({ data: card }))
     .catch((err) => errorHandler(res, err));
 };

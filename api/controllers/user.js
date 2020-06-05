@@ -31,7 +31,9 @@ module.exports.updateUser = (req, res) => {
 };
 
 module.exports.updateUserAvatar = (req, res) => {
-  User.findByIdAndUpdate(req.params.id,
+  console.log(req.user._id);
+
+  User.findByIdAndUpdate(req.user._id,
     { avatar: req.body.avatar },
     {
       new: true,

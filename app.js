@@ -2,9 +2,7 @@ const express = require('express');
 
 const app = express();
 const mongoose = require('mongoose');
-const path = require('path');
 
-const staticDir = path.join(__dirname, 'client/dist');
 const bodyParser = require('body-parser');
 
 const userRoutes = require('./api/routes/user');
@@ -30,14 +28,13 @@ mongoose.connect(URI, options)
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-app.use(express.static(staticDir));
 
 
 // *************** MIDDLEWARES ****************** //
 
 app.use((req, res, next) => {
   req.user = {
-    _id: '5ed63968e2bbd68f18e57bf',
+    _id: '5ed639686e2bbd68f18e57bf',
   };
 
   next();
