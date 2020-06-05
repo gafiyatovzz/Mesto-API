@@ -19,7 +19,7 @@ module.exports.getCards = (req, res) => {
 
 module.exports.deleteCard = (req, res) => {
   Card.findByIdAndRemove(req.params.id)
-    .then((card) => (!card ? Promise.reject(res.status(400).json({ message: 'Карточка не найдена!' })) : res.send({ data: card })))
+    .then((card) => (!card ? Promise.reject(res.status(404).json({ message: 'Карточка не найдена!' })) : res.send({ data: card })))
     .catch((err) => errorHandler(res, err));
 };
 
@@ -30,7 +30,7 @@ module.exports.addLike = (req, res) => {
     { $addToSet: { likes: [req.user._id] } },
     { new: true },
   )
-    .then((card) => (!card ? Promise.reject(res.status(400).json({ message: 'Карточка не найдена!' })) : res.send({ data: card })))
+    .then((card) => (!card ? Promise.reject(res.status(404).json({ message: 'Карточка не найдена!' })) : res.send({ data: card })))
     .catch((err) => errorHandler(res, err));
 };
 
@@ -41,6 +41,6 @@ module.exports.disLike = (req, res) => {
     { $pull: { likes: req.user._id } },
     { new: true },
   )
-    .then((card) => (!card ? Promise.reject(res.status(400).json({ message: 'Карточка не найдена!' })) : res.send({ data: card })))
+    .then((card) => (!card ? Promise.reject(res.status(404).json({ message: 'Карточка не найдена!' })) : res.send({ data: card })))
     .catch((err) => errorHandler(res, err));
 };

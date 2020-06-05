@@ -4,7 +4,7 @@ const errorHandler = require('../utils/errorHandler');
 
 module.exports.getById = (req, res) => {
   User.findById(req.params.id)
-    .then((user) => (!user ? Promise.reject(res.status(400).json({ message: 'Пользователь не найден!' })) : res.send({ data: user })))
+    .then((user) => (!user ? Promise.reject(res.status(404).json({ message: 'Пользователь не найден!' })) : res.send({ data: user })))
     .catch((err) => errorHandler(res, err));
 };
 
@@ -25,8 +25,14 @@ module.exports.createUser = (req, res) => {
 module.exports.updateUser = (req, res) => {
   const { name, about } = req.body;
 
-  User.findOneAndUpdate(req.params.id, { name, about })
-    .then((user) => (!user ? Promise.reject(res.status(400).json({ message: 'Пользователь не найден!' })) : res.send({ data: user })))
+  User.findOneAndUpdate(req.params.id,
+    { name, about },
+    {
+      new: true,
+      runValidators: true,
+      upsert: true,
+    })
+    .then((user) => (!user ? Promise.reject(res.status(404).json({ message: 'Пользователь не найден!' })) : res.send({ data: user })))
     .catch((err) => errorHandler(res, err));
 };
 
@@ -40,6 +46,6 @@ module.exports.updateUserAvatar = (req, res) => {
       runValidators: true,
       upsert: true,
     })
-    .then((user) => (!user ? Promise.reject(res.status(400).json({ message: 'Пользователь не найден!' })) : res.send({ data: user })))
+    .then((user) => (!user ? Promise.reject(res.status(404).json({ message: 'Пользователь не найден!' })) : res.send({ data: user })))
     .catch((err) => errorHandler(res, err));
 };

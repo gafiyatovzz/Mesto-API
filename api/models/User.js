@@ -6,12 +6,20 @@ const userSchema = new mongoose.Schema({
     minlength: 2,
     maxlength: 30,
     required: true,
+    validate: {
+      // eslint-disable-next-line
+      validator: (value) => /[A-Za-z0-9]/.test(value),
+    },
   },
   about: {
     type: String,
     minlength: 2,
     maxlength: 30,
     required: true,
+    validate: {
+      // eslint-disable-next-line
+      validator: (value) => /[A-Za-z0-9]/.test(value),
+    },
   },
   avatar: {
     type: String,
