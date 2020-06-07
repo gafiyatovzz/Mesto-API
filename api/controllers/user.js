@@ -25,7 +25,7 @@ module.exports.createUser = (req, res) => {
 module.exports.updateUser = (req, res) => {
   const { name, about } = req.body;
 
-  User.findOneAndUpdate(req.params.id,
+  User.findOneAndUpdate(req.user._id,
     { name, about },
     {
       new: true,
