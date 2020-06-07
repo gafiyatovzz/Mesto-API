@@ -14,7 +14,7 @@ module.exports = (res, error) => {
   if (error.name === 'ValidationError') {
     res.status(400).json({
       success: false,
-      message: error,
+      message: '400 - ошибка валидации',
     });
   }
 };

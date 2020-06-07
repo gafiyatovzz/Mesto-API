@@ -8,7 +8,7 @@ const userSchema = new mongoose.Schema({
     required: true,
     validate: {
       // eslint-disable-next-line
-      validator: (value) => /[A-Za-z0-9]/.test(value),
+      validator: (value) => /\w/.test(value),
     },
   },
   about: {
@@ -18,7 +18,7 @@ const userSchema = new mongoose.Schema({
     required: true,
     validate: {
       // eslint-disable-next-line
-      validator: (value) => /[A-Za-z0-9]/.test(value),
+      validator: (value) => /\w/.test(value),
     },
   },
   avatar: {
