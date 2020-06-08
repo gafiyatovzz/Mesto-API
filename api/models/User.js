@@ -1,6 +1,7 @@
 /* eslint-disable func-names */
 const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
+const isEmail = require('validator/lib/isEmail');
 
 const userSchema = new mongoose.Schema({
   name: {
@@ -37,7 +38,8 @@ const userSchema = new mongoose.Schema({
     required: true,
     validate: {
       // eslint-disable-next-line
-      validator: (value) => /[\w\-]+@[\w\-]+\.[\w\-^0-9]+/.test(value),
+      validator: (v) => isEmail(v),
+      message: 'Неправильный формат почты',
     },
   },
   password: {
