@@ -1,6 +1,8 @@
 // const assert = require('assert');
+const bcrypt = require('bcryptjs');
 const User = require('../models/User');
 const errorHandler = require('../utils/errorHandler');
+
 
 module.exports.getById = (req, res) => {
   User.findById(req.params.id)
@@ -15,11 +17,28 @@ module.exports.getAll = (req, res) => {
 };
 
 module.exports.createUser = (req, res) => {
-  const { name, about, avatar } = req.body;
-
-  User.create({ name, about, avatar })
-    .then((user) => res.send({ data: user }))
-    .catch((err) => errorHandler(res, err));
+  bcrypt.hash(req.body.password, 10)
+    .then((hash) => {
+      User.create({
+        name: req.body.name,
+        about: req.body.about,
+        avatar: req.body.avatar,
+        email: req.body.email,
+        password: hash,
+      })
+        .then((user) => {
+          res.status(201).send({
+            data: {
+              _id: user._id,
+              name: user.name,
+              about: user.about,
+              avatar: user.avatar,
+              email: user.email,
+            },
+          });
+        })
+        .catch((err) => errorHandler(res, err));
+    });
 };
 
 module.exports.updateUser = (req, res) => {
