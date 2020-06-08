@@ -7,8 +7,6 @@ router.get('/:id', controller.getById);
 
 router.get('/', controller.getAll);
 
-router.post('/', controller.createUser);
-
 router.patch('/me', controller.updateUser);
 
 router.patch('/me/avatar', controller.updateUserAvatar);
