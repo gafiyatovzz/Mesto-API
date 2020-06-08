@@ -1,6 +1,8 @@
 const express = require('express');
+const cookieParser = require('cookie-parser');
 
 const app = express();
+
 const mongoose = require('mongoose');
 
 const bodyParser = require('body-parser');
@@ -25,7 +27,7 @@ mongoose.connect(URI, options)
 
 
 // *************** CONFIG ****************** //
-
+app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 

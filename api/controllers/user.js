@@ -22,7 +22,12 @@ module.exports.login = (req, res) => {
   return User.findUserByCredentials(email, password)
     .then((user) => {
       const token = jwt.signin({ _id: user._id }, 'super-strong-secret', { expiresIn: '7d' });
-      res.send({ token });
+      res
+        .cookie('jwt', token, {
+          maxAge: 360000,
+          httpOnly: true,
+        })
+        .end();
     })
     .catch((err) => errorHandler(res, err));
 };
