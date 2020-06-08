@@ -7,10 +7,10 @@ const mongoose = require('mongoose');
 
 const bodyParser = require('body-parser');
 
+const auth = require('./api/middlewares/auth');
+const userController = require('./api/controllers/user');
 const userRoutes = require('./api/routes/user');
 const cardRoutes = require('./api/routes/card');
-const userController = require('./api/controllers/user');
-const auth = require('./api/middlewares/auth');
 
 
 // *************** MONGO_DB ****************** //

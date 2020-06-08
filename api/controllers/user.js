@@ -21,7 +21,7 @@ module.exports.login = (req, res) => {
 
   return User.findUserByCredentials(email, password)
     .then((user) => {
-      const token = jwt.signin({ _id: user._id }, 'super-strong-secret', { expiresIn: '7d' });
+      const token = jwt.sign({ _id: user._id }, 'super-strong-secret', { expiresIn: '7d' });
       res
         .cookie('jwt', token, {
           maxAge: 360000,
@@ -72,8 +72,6 @@ module.exports.updateUser = (req, res) => {
 };
 
 module.exports.updateUserAvatar = (req, res) => {
-  console.log(req.user._id);
-
   User.findByIdAndUpdate(req.user._id,
     { avatar: req.body.avatar },
     {

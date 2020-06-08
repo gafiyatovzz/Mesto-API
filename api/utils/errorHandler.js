@@ -2,25 +2,25 @@ module.exports = (res, error) => {
   if (error.name === 'CastError') {
     res.status(404).json({
       success: false,
-      message: 'Некорректный id в запросе',
+      message: error.message,
     });
   }
   if (error.name === 'MongoError') {
     res.status(400).json({
       success: false,
-      message: '400 - некорректный id',
+      message: error.message,
     });
   }
   if (error.name === 'ValidationError') {
     res.status(400).json({
       success: false,
-      message: '400 - ошибка валидации',
+      message: error.message,
     });
   }
-  if (error.name === 'Unauthorized') {
+  if (error.name === 'Error') {
     res.status(401).json({
       success: false,
-      message: '401 - ошибка авторизации',
+      message: error.message,
     });
   }
 };
