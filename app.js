@@ -10,6 +10,7 @@ const bodyParser = require('body-parser');
 const userRoutes = require('./api/routes/user');
 const cardRoutes = require('./api/routes/card');
 const userController = require('./api/controllers/user');
+const auth = require('./api/middlewares/auth');
 
 
 // *************** MONGO_DB ****************** //
@@ -37,6 +38,8 @@ app.use(bodyParser.json());
 
 app.post('/signin', userController.login);
 app.post('/signup', userController.createUser);
+
+app.use(auth);
 
 app.use('/users', userRoutes);
 app.use('/cards', cardRoutes);

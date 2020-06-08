@@ -44,15 +44,16 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true,
     minlength: 8,
+    select: false,
   },
 });
 
-module.exports.findUserByCredentials = function (email, password) {
-  const user = this.findOne({ email });
+module.exports.findUserByCredentials = async (email, password) => {
+  const user = await this.findOne({ email }).select('+password');
   if (!user) {
     return Promise.reject(new Error('Неправильные почта или пароль'));
   }
-  const matched = bcrypt.compare(password, user.password);
+  const matched = await bcrypt.compare(password, user.password);
   if (!matched) {
     return Promise.reject(new Error('Неправильные почта или пароль'));
   }
