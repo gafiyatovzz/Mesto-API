@@ -33,27 +33,35 @@ module.exports.login = (req, res) => {
 };
 
 module.exports.createUser = (req, res) => {
-  bcrypt.hash(req.body.password, 10)
-    .then((hash) => {
-      User.create({
-        name: req.body.name,
-        about: req.body.about,
-        avatar: req.body.avatar,
-        email: req.body.email,
-        password: hash,
-      })
-        .then((user) => {
-          res.status(201).send({
-            data: {
-              _id: user._id,
-              name: user.name,
-              about: user.about,
-              avatar: user.avatar,
-              email: user.email,
-            },
-          });
-        })
-        .catch((err) => errorHandler(res, err));
+  User.findOne({ email: req.body.email })
+    .then((candidate) => {
+      if (candidate) {
+        res.status(409).send({
+          message: 'Такой email уже занят. Попробуйте другой.',
+        });
+      }
+      bcrypt.hash(req.body.password, 10)
+        .then((hash) => {
+          User.create({
+            name: req.body.name,
+            about: req.body.about,
+            avatar: req.body.avatar,
+            email: req.body.email,
+            password: hash,
+          })
+            .then((user) => {
+              res.status(201).send({
+                data: {
+                  _id: user._id,
+                  name: user.name,
+                  about: user.about,
+                  avatar: user.avatar,
+                  email: user.email,
+                },
+              });
+            })
+            .catch((err) => errorHandler(res, err));
+        });
     });
 };
 
