@@ -1,6 +1,5 @@
-# Project-12
-## Работа с express.js и роутингом
-Доступен по ссылке: https://gafiyatovzz.github.io/FrontProject/
+# Mesto
+## Ведутся работы над API проекта. Подробности в ветке develop.
 
 ## Инструкция по сборке
    ### Установка звисимостей
