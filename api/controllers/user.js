@@ -1,5 +1,5 @@
-// const assert = require('assert');
 const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
 const User = require('../models/User');
 const errorHandler = require('../utils/errorHandler');
 
@@ -13,6 +13,17 @@ module.exports.getById = (req, res) => {
 module.exports.getAll = (req, res) => {
   User.find({})
     .then((user) => res.send({ data: user }))
+    .catch((err) => errorHandler(res, err));
+};
+
+module.exports.login = (req, res) => {
+  const { email, password } = req.body;
+
+  return User.findUserByCredentials(email, password)
+    .then((user) => {
+      const token = jwt.signin({ _id: user._id }, 'super-strong-secret', { expiresIn: '7d' });
+      res.send({ token });
+    })
     .catch((err) => errorHandler(res, err));
 };
 

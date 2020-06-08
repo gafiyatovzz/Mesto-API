@@ -17,4 +17,10 @@ module.exports = (res, error) => {
       message: '400 - ошибка валидации',
     });
   }
+  if (error.name === 'Unauthorized') {
+    res.status(401).json({
+      success: false,
+      message: '401 - ошибка авторизации',
+    });
+  }
 };
