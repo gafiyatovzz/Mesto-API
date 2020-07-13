@@ -18,7 +18,7 @@ module.exports.getCards = (req, res) => {
 
 
 module.exports.deleteCard = (req, res) => {
-  Card.findByIdAndRemove(req.user._id)
+  Card.findByIdAndRemove(req.card._id)
     .then((card) => (!card ? Promise.reject(res.status(404).json({ message: 'Карточка не найдена!' })) : res.send({ data: card })))
     .catch((err) => errorHandler(res, err));
 };

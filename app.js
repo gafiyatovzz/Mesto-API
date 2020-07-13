@@ -1,6 +1,8 @@
 const express = require('express');
 const cookieParser = require('cookie-parser');
 
+const { PORT = 3000 } = process.env;
+
 const app = express();
 
 const mongoose = require('mongoose');
@@ -11,7 +13,6 @@ const auth = require('./api/middlewares/auth');
 const userController = require('./api/controllers/user');
 const userRoutes = require('./api/routes/user');
 const cardRoutes = require('./api/routes/card');
-
 
 // *************** MONGO_DB ****************** //
 
@@ -48,4 +49,7 @@ app.use((req, res) => {
   res.status(404).send({ message: 'Запрашиваемый ресурс не найден' });
 });
 
-module.exports = app;
+
+app.listen(PORT, () => {
+  console.log('Server launch on port', PORT);
+});
