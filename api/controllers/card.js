@@ -18,12 +18,25 @@ module.exports.getCards = (req, res) => {
 
 
 module.exports.deleteCard = (req, res) => {
-  Card.findByIdAndRemove(req.card._id)
-    .then((card) => (!card ? Promise.reject(res.status(404).json({ message: 'Карточка не найдена!' })) : res.send({ data: card })))
+  Card.findById(req.params.id)
+    .then((card) => {
+      if (card === null) {
+        res.status(404).send({ message: 'Такой карточки не существует' });
+      }
+      return card;
+    })
+    .then((card) => {
+      if (card.owner == req.user._id) {
+        Card.findByIdAndRemove(card._id);
+        res.send({ card });
+      } else {
+        res.status(401).send({ message: 'Запрещено удалять чужие карты' });
+      }
+    })
     .catch((err) => errorHandler(res, err));
 };
 
-
+// Promise.reject(res.status(404).json({ message: 'Карточка не найдена!' })
 module.exports.addLike = (req, res) => {
   Card.findByIdAndUpdate(
     req.params.id,
