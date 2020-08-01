@@ -27,8 +27,8 @@ module.exports.deleteCard = (req, res) => {
     })
     .then((card) => {
       if (card.owner == req.user._id) {
-        Card.findByIdAndRemove(card._id);
-        res.send({ card });
+        Card.findByIdAndRemove(card._id)
+          .then(() => res.send({ message: 'Карточка удалена!' }));
       } else {
         res.status(401).send({ message: 'Запрещено удалять чужие карты' });
       }
