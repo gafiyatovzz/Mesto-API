@@ -1,18 +1,21 @@
 const express = require('express');
 const cookieParser = require('cookie-parser');
 
-const { PORT = 3000 } = process.env;
+const { PORT = 4000 } = process.env;
 
 const app = express();
 
 const mongoose = require('mongoose');
 
 const bodyParser = require('body-parser');
+const { errors } = require('celebrate');
 
 const auth = require('./middlewares/auth');
+const { requestLogger, errorLogger } = require('./middlewares/logger');
 const userController = require('./controllers/user');
 const userRoutes = require('./routes/user');
 const cardRoutes = require('./routes/card');
+
 
 // *************** MONGO_DB ****************** //
 
@@ -33,7 +36,7 @@ mongoose.connect(URI, options)
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-
+app.use(requestLogger);
 
 // *************** ROUTES ****************** //
 
@@ -45,8 +48,24 @@ app.use(auth);
 app.use('/users', userRoutes);
 app.use('/cards', cardRoutes);
 
-app.use((req, res) => {
-  res.status(404).send({ message: 'Запрашиваемый ресурс не найден' });
+app.use(errorLogger);
+
+app.use(errors());
+
+app.use((err, req, res) => {
+  if (!err.statusCode) {
+    const { statusCode = 500, message } = err;
+
+    res
+      .status(statusCode)
+      .send({
+        // проверяем статус и выставляем сообщение в зависимости от него
+        message: statusCode === 500
+          ? 'На сервере произошла ошибка'
+          : message,
+      });
+  }
+  res.status(err.statusCode).send({ message: err.message });
 });
 
 
