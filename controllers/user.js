@@ -1,7 +1,10 @@
 const bcrypt = require('bcryptjs');
+
 const jwt = require('jsonwebtoken');
 const User = require('../models/User');
 const NotFoundError = require('../utils/NotFoundError');
+
+const { NODE_ENV, JWT_SECRET } = process.env;
 
 module.exports.getById = (req, res, next) => {
   User.findById(req.params.id)
@@ -33,7 +36,10 @@ module.exports.login = (req, res, next) => {
       if (!user) {
         throw new NotFoundError('Неверный параметр запроса. Ошибка 404.');
       }
-      const token = jwt.sign({ _id: user._id }, 'super-strong-secret', { expiresIn: '7d' });
+      const token = jwt.sign({ _id: user._id },
+        NODE_ENV === 'production' ? JWT_SECRET : 'dev-secret',
+        { expiresIn: '7d' }
+      );
       res
         .cookie('jwt', token, {
           maxAge: 360000,
