@@ -15,12 +15,8 @@ router.post('/', celebrate({
 }), controller.createCard);
 
 router.get('/', celebrate({
-  body: Joi.object().keys({
-    name: Joi.string().required().min(2).max(30),
-    link: Joi.string().required().regex(regx),
-    owner: Joi.string().required(),
-    likes: Joi.string().default([]),
-    createdAt: Joi.date().default(Date.now),
+  params: Joi.object().keys({
+    id: Joi.string().alphanum().length(24),
   }),
 }), controller.getCards);
 

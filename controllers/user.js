@@ -2,6 +2,7 @@ const bcrypt = require('bcryptjs');
 
 const jwt = require('jsonwebtoken');
 const User = require('../models/User');
+const errorHandler = require('../utils/errorHandler');
 const NotFoundError = require('../utils/NotFoundError');
 
 const { NODE_ENV, JWT_SECRET } = process.env;
@@ -47,7 +48,9 @@ module.exports.login = (req, res, next) => {
         })
         .end();
     })
-    .catch(next);
+    .catch((err) => {
+      errorHandler(res, err);
+    });
 };
 
 module.exports.createUser = (req, res, next) => {
@@ -62,18 +65,26 @@ module.exports.createUser = (req, res, next) => {
         email: req.body.email,
         password: hash,
       })
-        .then((user) => {
-          res.status(201).send({
-            data: {
-              _id: user._id,
-              name: user.name,
-              about: user.about,
-              avatar: user.avatar,
-              email: user.email,
-            },
-          });
-        })
-        .catch(next);
+      .then((user) => {
+        
+        if (!user) {
+          throw new NotFoundError('Неверный параметр запроса.');
+        }
+      })
+      .then((user) => {
+        res.status(201).send({
+          data: {
+            _id: user._id,
+            name: user.name,
+            about: user.about,
+            avatar: user.avatar,
+            email: user.email,
+          },
+        });
+      })
+      .catch((err) => {
+        errorHandler(res, err);
+      });
     });
 };
 
