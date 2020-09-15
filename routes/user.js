@@ -7,14 +7,8 @@ const { celebrate, Joi } = require('../node_modules/celebrate');
 
 
 router.get('/:id', celebrate({
-  body: Joi.object().keys({
-    name: Joi.string().required().min(2).max(30)
-      .alphanum(),
-    about: Joi.string().required().min(2).max(30)
-      .alphanum(),
-    avatar: Joi.string().required(),
-    email: Joi.string().required().email(),
-    password: Joi.string().required().min(8),
+  params: Joi.object().keys({
+    id: Joi.string().alphanum().length(24),
   }),
 }), controller.getById);
 
