@@ -18,17 +18,7 @@ router.get('/:id', celebrate({
   }),
 }), controller.getById);
 
-router.get('/', celebrate({
-  body: Joi.object().keys({
-    name: Joi.string().required().min(2).max(30)
-      .alphanum(),
-    about: Joi.string().required().min(2).max(30)
-      .alphanum(),
-    avatar: Joi.string().required(),
-    email: Joi.string().required().email(),
-    password: Joi.string().required().min(8),
-  }),
-}), controller.getAll);
+router.get('/', controller.getAll);
 
 router.patch('/me', celebrate({
   body: Joi.object().keys({
