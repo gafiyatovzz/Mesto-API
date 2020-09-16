@@ -8,15 +8,11 @@ const { celebrate, Joi } = require('../node_modules/celebrate');
 
 router.get('/:id', celebrate({
   params: Joi.object().keys({
-    id: Joi.string().alphanum().length(24),
+    id: Joi.string().hex(),
   }),
 }), controller.getById);
 
-router.get('/', celebrate({
-  params: Joi.object().keys({
-    id: Joi.string().alphanum().length(24),
-  }),
-}), controller.getAll);
+router.get('/', controller.getAll);
 
 router.patch('/me', celebrate({
   body: Joi.object().keys({

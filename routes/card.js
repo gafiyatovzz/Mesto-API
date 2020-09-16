@@ -14,27 +14,23 @@ router.post('/', celebrate({
   }),
 }), controller.createCard);
 
-router.get('/', celebrate({
-  params: Joi.object().keys({
-    id: Joi.string().alphanum().length(24),
-  }),
-}), controller.getCards);
+router.get('/', controller.getCards);
 
 router.delete('/:id', celebrate({
   params: Joi.object().keys({
-    id: Joi.string().alphanum().length(24),
+    id: Joi.string().hex(),
   }),
 }), controller.deleteCard);
 
 router.delete('/:id/likes', celebrate({
   params: Joi.object().keys({
-    id: Joi.string().alphanum().length(24),
+    id: Joi.string().hex(),
   }),
 }), controller.disLike);
 
 router.put('/:id/likes', celebrate({
   params: Joi.object().keys({
-    id: Joi.string().alphanum().length(24),
+    id: Joi.string().hex(),
   }),
 }), controller.addLike);
 

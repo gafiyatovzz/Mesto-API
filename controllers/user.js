@@ -67,11 +67,6 @@ module.exports.createUser = (req, res) => {
         password: hash,
       })
         .then((user) => {
-          if (!user) {
-            throw new NotFoundError('Неверный параметр запроса.');
-          }
-        })
-        .then((user) => {
           res.status(201).send({
             data: {
               _id: user._id,
