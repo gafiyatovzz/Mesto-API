@@ -8,7 +8,7 @@ module.exports = (res, error) => {
   if (error.name === 'MongoError') {
     res.status(409).json({
       success: false,
-      message: "Пользователь существует!",
+      message: 'Пользователь существует!',
     });
   }
   if (error.name === 'ValidationError') {
