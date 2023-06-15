@@ -2,6 +2,7 @@ const bcrypt = require('bcryptjs');
 
 const jwt = require('jsonwebtoken');
 const User = require('../models/User');
+const errorHandler = require('../utils/errorHandler');
 const NotFoundError = require('../utils/NotFoundError');
 
 const { NODE_ENV, JWT_SECRET } = process.env;
@@ -28,7 +29,7 @@ module.exports.getAll = (req, res, next) => {
     .catch(next);
 };
 
-module.exports.login = (req, res, next) => {
+module.exports.login = (req, res) => {
   const { email, password } = req.body;
 
   return User.findUserByCredentials(email, password)
@@ -36,9 +37,10 @@ module.exports.login = (req, res, next) => {
       if (!user) {
         throw new NotFoundError('Неверный параметр запроса. Ошибка 404.');
       }
-      const token = jwt.sign({ _id: user._id },
+      const token = jwt.sign(
+        { _id: user._id },
         NODE_ENV === 'production' ? JWT_SECRET : 'dev-secret',
-        { expiresIn: '7d' }
+        { expiresIn: '7d' },
       );
       res
         .cookie('jwt', token, {
@@ -47,10 +49,12 @@ module.exports.login = (req, res, next) => {
         })
         .end();
     })
-    .catch(next);
+    .catch((err) => {
+      errorHandler(res, err);
+    });
 };
 
-module.exports.createUser = (req, res, next) => {
+module.exports.createUser = (req, res) => {
   User.findOne({ email: req.body.email });
 
   bcrypt.hash(req.body.password, 10)
@@ -73,7 +77,9 @@ module.exports.createUser = (req, res, next) => {
             },
           });
         })
-        .catch(next);
+        .catch((err) => {
+          errorHandler(res, err);
+        });
     });
 };
 

@@ -6,9 +6,9 @@ module.exports = (res, error) => {
     });
   }
   if (error.name === 'MongoError') {
-    res.status(400).json({
+    res.status(409).json({
       success: false,
-      message: error.message,
+      message: 'Пользователь существует!',
     });
   }
   if (error.name === 'ValidationError') {

@@ -40,6 +40,13 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(requestLogger);
 
+// *************** CRASH-TEST ****************** //
+app.get('/crash-test', () => {
+  setTimeout(() => {
+    throw new Error('Сервер сейчас упадёт');
+  }, 0);
+});
+
 // *************** ROUTES ****************** //
 
 app.post('/signin', userController.login);
